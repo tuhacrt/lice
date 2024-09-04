@@ -27,6 +27,8 @@ export function getPackageInformationMap(packages: Record<string, ModuleInfo>): 
         name || original,
         {
           ...packages[original],
+          // remove the name property from the dependency object, as it is already the key
+          name: undefined,
           version,
           fromLicense: checkIsFromLicenseFile(packages[original].licenseFile),
         },

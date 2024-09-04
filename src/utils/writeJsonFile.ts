@@ -11,7 +11,7 @@ function parseOutputFileName(outputFileName: string, type: string): string {
 
 export function writeJsonFile(outputFilePath: string, dependencies: Array<License>, outputFileName: string): void {
   const filePath = join(outputFilePath, parseOutputFileName(outputFileName, 'json'))
-  const content: Record<string, Record<string, License>> = {}
+  const content: Record<string, Record<string, Partial<License>>> = {}
   const allLicenses = [...new Set(dependencies.map(({ license }) => license ?? 'unknown'))]
 
   allLicenses.forEach((license) => {
@@ -21,7 +21,8 @@ export function writeJsonFile(outputFilePath: string, dependencies: Array<Licens
   dependencies.forEach((dependency) => {
     const license = dependency?.license || 'unknown'
 
-    content[license.toString()][dependency.name] = dependency
+    // remove the name property from the dependency object, as it is already the key
+    content[license.toString()][dependency.name] = { ...dependency, name: undefined }
   })
 
   return writeFileSync(filePath, JSON.stringify(content))
