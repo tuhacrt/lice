@@ -1,19 +1,40 @@
-import { basename } from 'node:path'
-
-import { globSync } from 'tinyglobby'
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-  entries: globSync(
-    ['src/commands/*.ts'],
-    { expandDirectories: false },
-  ).map(i => ({
-    input: i.slice(0, -3),
-    name: basename(i).slice(0, -3),
-  })),
-  declaration: true,
-  clean: true,
+  entries: [
+    'src/index',
+    'src/commands/lice',
+  ],
   rollup: {
     emitCJS: true,
   },
+  declaration: true,
+  clean: true,
 })
+
+/*
+import { defineBuildConfig } from 'unbuild'
+
+export default defineBuildConfig({
+  entries: [
+    'src/index',
+    'src/cli',
+  ],
+  rollup: {
+    inlineDependencies: true,
+    json: {
+      compact: true,
+      namedExports: false,
+      preferConst: false,
+    },
+    commonjs: {
+      requireReturnsDefault: 'auto',
+    },
+    dts: {
+      respectExternal: false,
+    },
+  },
+  clean: true,
+  declaration: true,
+})
+*/

@@ -4,3 +4,4 @@ export { getDevelopDependencies } from './utils/getDevelopDependencies'
 export { writeJsonFile } from './utils/writeJsonFile'
 
 export * from './type'
+export { lice } from './commands/lice'
