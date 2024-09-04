@@ -27,7 +27,9 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - run: pnpm install
-      - run: pnpm publish -r --access public
+
+      # The --no-git-checks flag is needed to bypass an issue[https://github.com/pnpm/pnpm/issues/5894] with pnpm related to GitHub's detached HEAD state during releases.
+      - run: pnpm publish -r --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_CONFIG_PROVENANCE: true

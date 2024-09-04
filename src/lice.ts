@@ -5,7 +5,7 @@ import { init } from 'license-checker-rseidelsohn'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
-import pkgJson from '../package.json'
+import pkgJson from '../package.json' assert { type: 'json' }
 
 import { getManyDependencyInformation } from './utils/getManyDependencyInformation'
 import { getManyUniqueDependencyNames } from './utils/getManyUniqueDependencyNames'
