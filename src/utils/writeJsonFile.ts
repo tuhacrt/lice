@@ -25,5 +25,5 @@ export function writeJsonFile(outputFilePath: string, dependencies: Array<Licens
     content[license.toString()][dependency.name] = { ...dependency, name: undefined }
   })
 
-  return writeFileSync(filePath, JSON.stringify(content))
+  return writeFileSync(filePath, JSON.stringify(content, null, 2))
 }
