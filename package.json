@@ -1,7 +1,7 @@
 {
   "name": "lice",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "packageManager": "pnpm@9.9.0",
   "description": "collect licenses information from node_modules via license-checker-rseidelsohn",
   "author": "Tuhacrt <a067800497@gmail.com>",
@@ -29,7 +29,7 @@
     "lint": "eslint .",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
-    "start": "esno src/index.ts",
+    "start": "esno src/lice.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
