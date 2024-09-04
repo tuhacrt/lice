@@ -1,7 +1,7 @@
 {
-  "name": "lice",
+  "name": "@tuhacrt/lice",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "packageManager": "pnpm@9.9.0",
   "description": "collect licenses information from node_modules via license-checker-rseidelsohn",
   "author": "Tuhacrt <a067800497@gmail.com>",
@@ -23,6 +23,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
@@ -39,21 +42,21 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.23.0",
-    "@antfu/ni": "^0.22.0",
+    "@antfu/eslint-config": "^2.27.3",
+    "@antfu/ni": "^0.22.4",
     "@antfu/utils": "^0.7.10",
-    "@types/node": "^20.14.11",
+    "@types/node": "^20.16.4",
     "@types/yargs": "^17.0.33",
-    "bumpp": "^9.4.1",
-    "eslint": "^9.7.0",
+    "bumpp": "^9.5.2",
+    "eslint": "^9.9.1",
     "esno": "^4.7.0",
-    "lint-staged": "^15.2.7",
-    "pnpm": "^9.5.0",
+    "lint-staged": "^15.2.10",
+    "pnpm": "^9.9.0",
     "simple-git-hooks": "^2.11.1",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "unbuild": "^2.0.0",
-    "vite": "^5.3.4",
-    "vitest": "^2.0.3"
+    "vite": "^5.4.3",
+    "vitest": "^2.0.5"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

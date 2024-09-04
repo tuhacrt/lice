@@ -56,17 +56,17 @@ const argv = yargs(hideBin(process.argv))
   .option('inputFilePath', {
     alias: 'i',
     type: 'string',
-    describe: 'the folder path of target package.json',
+    describe: 'The folder path of target package.json',
   })
   .option('outputFilePath', {
     alias: 'o',
     type: 'string',
-    describe: 'the path to create the output file',
+    describe: 'The path to create the output file',
   })
   .option('outputFileName', {
     alias: 'n',
     type: 'string',
-    describe: 'the name of the output file, defaults to package "{name}@{version}.json"',
+    describe: 'The name of the output file, defaults to package "{name}@{version}.json"',
   })
   .demandOption(['inputFilePath', 'outputFilePath'])
   .showHelpOnFail(false)
