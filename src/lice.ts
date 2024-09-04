@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import process from 'node:process'
 
@@ -37,8 +38,9 @@ export function lice(start: string, outputFilePath: string, outputFileName?: str
         throw new Error('please specify where to create the file as third argument')
       }
 
-      const startPkg = await import(join(process.cwd(), start, 'package.json'))
-      const defaultOutputFileName = `${startPkg.name}@${startPkg.version}.json`
+      const startPkgFile = readFileSync(new URL(join(process.cwd(), start, 'package.json'), import.meta.url))
+      const startPkg = JSON.parse(startPkgFile.toString())
+      const defaultOutputFileName = `${startPkg?.name}@${startPkg?.version}.json`.replace('/', '-')
 
       const packageMap = getPackageInformationMap(moduleInfos)
       const dependencies = readPackageJsonFile(start)
