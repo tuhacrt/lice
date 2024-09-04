@@ -3,7 +3,7 @@ import { defineBuildConfig } from 'unbuild'
 export default defineBuildConfig({
   entries: [
     'src/index',
-    'src/commands/lice',
+    'src/lice',
   ],
   rollup: {
     emitCJS: true,
