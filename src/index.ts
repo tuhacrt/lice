@@ -1,4 +1,4 @@
-export { getPackageMap } from './utils/getPackageMap'
+export { getPackageInformationMap } from './utils/getPackageInformationMap'
 export { getManyUniqueDependencyNames } from './utils/getManyUniqueDependencyNames'
 export { getManyDependencyInformation } from './utils/getManyDependencyInformation'
 export { writeJsonFile } from './utils/writeJsonFile'
