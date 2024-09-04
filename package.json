@@ -1,18 +1,17 @@
 {
-  "name": "pkg-placeholder",
+  "name": "lice",
   "type": "module",
   "version": "0.0.0",
-  "packageManager": "pnpm@9.5.0",
-  "description": "_description_",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "packageManager": "pnpm@9.9.0",
+  "description": "collect licenses information from node_modules via license-checker-rseidelsohn",
+  "author": "Tuhacrt <a067800497@gmail.com>",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/pkg-placeholder#readme",
+  "homepage": "https://github.com/tuhacrt/lice#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/pkg-placeholder.git"
+    "url": "git+https://github.com/tuhacrt/lice.git"
   },
-  "bugs": "https://github.com/antfu/pkg-placeholder/issues",
+  "bugs": "https://github.com/tuhacrt/lice/issues",
   "keywords": [],
   "sideEffects": false,
   "exports": {
@@ -33,6 +32,9 @@
       ]
     }
   },
+  "bin": {
+    "lice": "bin/index.mjs"
+  },
   "files": [
     "dist"
   ],
@@ -47,17 +49,23 @@
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
+  "dependencies": {
+    "license-checker-rseidelsohn": "^4.2.11",
+    "yargs": "^17.7.2"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.23.0",
     "@antfu/ni": "^0.22.0",
     "@antfu/utils": "^0.7.10",
     "@types/node": "^20.14.11",
+    "@types/yargs": "^17.0.33",
     "bumpp": "^9.4.1",
     "eslint": "^9.7.0",
     "esno": "^4.7.0",
     "lint-staged": "^15.2.7",
     "pnpm": "^9.5.0",
     "simple-git-hooks": "^2.11.1",
+    "tinyglobby": "^0.2.5",
     "typescript": "^5.5.3",
     "unbuild": "^2.0.0",
     "vite": "^5.3.4",
