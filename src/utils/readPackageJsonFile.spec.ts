@@ -1,0 +1,147 @@
+import { expect, it, vi } from 'vitest'
+
+import { readPackageJsonFile } from './readPackageJsonFile'
+
+it('should return an object contains package.json', () => {
+  const path = 'path/to/package'
+
+  vi.mock('node:fs', async () => ({
+    ...(await vi.importActual<typeof import('node:fs')>('node:fs')),
+    readFileSync: vi.fn().mockReturnValue(`{
+    "name": "@tuhacrt/lice",
+    "type": "module",
+    "version": "0.1.4",
+    "packageManager": "pnpm@9.9.0",
+    "description": "collect licenses information from node_modules via license-checker-rseidelsohn",
+    "author": "Tuhacrt <a067800497@gmail.com>",
+    "license": "MIT",
+    "homepage": "https://github.com/tuhacrt/lice#readme",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/tuhacrt/lice.git"
+    },
+    "bugs": "https://github.com/tuhacrt/lice/issues",
+    "keywords": [],
+    "sideEffects": false,
+    "main": "dist/index.mjs",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "bin": {
+      "lice": "bin/lice.mjs"
+    },
+    "files": [
+      "dist"
+    ],
+    "engines": {
+      "node": ">=20"
+    },
+    "scripts": {
+      "build": "unbuild",
+      "dev": "unbuild --stub",
+      "lint": "eslint .",
+      "prepublishOnly": "nr build",
+      "release": "bumpp && npm publish",
+      "start": "esno src/lice.ts",
+      "test": "vitest",
+      "typecheck": "tsc --noEmit",
+      "prepare": "simple-git-hooks"
+    },
+    "dependencies": {
+      "license-checker-rseidelsohn": "^4.2.11",
+      "yargs": "^17.7.2"
+    },
+    "devDependencies": {
+      "@antfu/eslint-config": "^2.27.3",
+      "@antfu/ni": "^0.22.4",
+      "@antfu/utils": "^0.7.10",
+      "@types/node": "^20.16.4",
+      "@types/yargs": "^17.0.33",
+      "bumpp": "^9.5.2",
+      "eslint": "^9.9.1",
+      "esno": "^4.7.0",
+      "lint-staged": "^15.2.10",
+      "pnpm": "^9.9.0",
+      "simple-git-hooks": "^2.11.1",
+      "typescript": "^5.5.4",
+      "unbuild": "^2.0.0",
+      "vite": "^5.4.3",
+      "vitest": "^2.0.5"
+    },
+    "simple-git-hooks": {
+      "pre-commit": "pnpm lint-staged"
+    },
+    "lint-staged": {
+      "*": "eslint --fix"
+    }
+  }`),
+  }))
+
+  expect(readPackageJsonFile(path))
+    .toEqual({
+      'name': '@tuhacrt/lice',
+      'type': 'module',
+      'version': '0.1.4',
+      'packageManager': 'pnpm@9.9.0',
+      'description': 'collect licenses information from node_modules via license-checker-rseidelsohn',
+      'author': 'Tuhacrt <a067800497@gmail.com>',
+      'license': 'MIT',
+      'homepage': 'https://github.com/tuhacrt/lice#readme',
+      'repository': {
+        type: 'git',
+        url: 'git+https://github.com/tuhacrt/lice.git',
+      },
+      'bugs': 'https://github.com/tuhacrt/lice/issues',
+      'keywords': [],
+      'sideEffects': false,
+      'main': 'dist/index.mjs',
+      'module': 'dist/index.mjs',
+      'types': 'dist/index.d.ts',
+      'bin': {
+        lice: 'bin/lice.mjs',
+      },
+      'files': [
+        'dist',
+      ],
+      'engines': {
+        node: '>=20',
+      },
+      'scripts': {
+        build: 'unbuild',
+        dev: 'unbuild --stub',
+        lint: 'eslint .',
+        prepublishOnly: 'nr build',
+        release: 'bumpp && npm publish',
+        start: 'esno src/lice.ts',
+        test: 'vitest',
+        typecheck: 'tsc --noEmit',
+        prepare: 'simple-git-hooks',
+      },
+      'dependencies': {
+        'license-checker-rseidelsohn': '^4.2.11',
+        'yargs': '^17.7.2',
+      },
+      'devDependencies': {
+        '@antfu/eslint-config': '^2.27.3',
+        '@antfu/ni': '^0.22.4',
+        '@antfu/utils': '^0.7.10',
+        '@types/node': '^20.16.4',
+        '@types/yargs': '^17.0.33',
+        'bumpp': '^9.5.2',
+        'eslint': '^9.9.1',
+        'esno': '^4.7.0',
+        'lint-staged': '^15.2.10',
+        'pnpm': '^9.9.0',
+        'simple-git-hooks': '^2.11.1',
+        'typescript': '^5.5.4',
+        'unbuild': '^2.0.0',
+        'vite': '^5.4.3',
+        'vitest': '^2.0.5',
+      },
+      'simple-git-hooks': {
+        'pre-commit': 'pnpm lint-staged',
+      },
+      'lint-staged': {
+        '*': 'eslint --fix',
+      },
+    })
+})
