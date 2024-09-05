@@ -1,5 +1,5 @@
-import { writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
 
 import type { License } from '../type'
 
@@ -11,6 +11,14 @@ function parseOutputFileName(outputFileName: string, type: string): string {
 
 export function writeJsonFile(outputFilePath: string, dependencies: Array<License>, outputFileName: string): void {
   const filePath = join(outputFilePath, parseOutputFileName(outputFileName, 'json'))
+
+  // Ensure the directory exists, create it if not
+  const dir = dirname(filePath)
+
+  if (!existsSync(dir)) {
+    mkdirSync(dir, { recursive: true })
+  }
+
   const content: Record<string, Record<string, Partial<License>>> = {}
   const allLicenses = [...new Set(dependencies.map(({ license }) => license ?? 'unknown'))]
 
