@@ -1,7 +1,7 @@
 {
   "name": "@tuhacrt/lice",
   "type": "module",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "packageManager": "pnpm@9.9.0",
   "description": "collect licenses information from node_modules via license-checker-rseidelsohn",
   "author": "Tuhacrt <a067800497@gmail.com>",
