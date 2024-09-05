@@ -9,7 +9,37 @@ function parseOutputFileName(outputFileName: string, type: string): string {
     : `packageDependencies.${type}`
 }
 
-export function writeJsonFile(outputFilePath: string, dependencies: Array<License>, outputFileName: string): void {
+function recursiveSort(obj: Record<string, any>): Record<string, any> {
+  return Object.keys(obj)
+    .sort((a, b) => {
+      if (a.startsWith('(') && b.startsWith('(')) {
+        return a.localeCompare(b)
+      }
+      else if (a.startsWith('(')) {
+        return 1
+      }
+      else if (b.startsWith('(')) {
+        return -1
+      }
+      else {
+        return a.localeCompare(b)
+      }
+    })
+    .reduce((acc, key) => {
+      const value = obj[key]
+
+      if (typeof value === 'object' && !Array.isArray(value)) {
+        acc[key] = recursiveSort(value)
+      }
+      else {
+        acc[key] = value
+      }
+
+      return acc
+    }, {} as Record<string, any>)
+}
+
+export function writeJsonFile(outputFilePath: string, dependencies: Array<License>, outputFileName: string): string {
   const filePath = join(outputFilePath, parseOutputFileName(outputFileName, 'json'))
 
   // Ensure the directory exists, create it if not
@@ -33,5 +63,10 @@ export function writeJsonFile(outputFilePath: string, dependencies: Array<Licens
     content[license.toString()][dependency.name] = { ...dependency, name: undefined }
   })
 
-  return writeFileSync(filePath, JSON.stringify(content, null, 2))
+  const sortedContent = recursiveSort(content)
+  const stringifiedContent = JSON.stringify(sortedContent, null, 2)
+
+  writeFileSync(filePath, stringifiedContent)
+
+  return stringifiedContent
 }
