@@ -21,7 +21,9 @@ it('should return sorted dependency information', () => {
 
   vi.mock('node:fs', async () => ({
     ...(await vi.importActual<typeof import('node:fs')>('node:fs')),
-    writeFileSync: vi.fn(),
+    existsSync: vi.fn(() => true),
+    mkdirSync: vi.fn(() => 'path/to/package'),
+    writeFileSync: vi.fn(() => {}),
   }))
 
   expect(writeJsonFile(path, dependencies, '.'))
